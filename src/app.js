@@ -77,7 +77,8 @@ app.use('/products', productsviewRouter);
 app.use('/carts', specificCart);
 app.use('/mockingproducts', productsMocks);
 app.use('/loggertest', loggerTest);
-app.use("/docs", auth, swaggerUi.serve, swaggerUi.setup(specs))
+// app.use("/docs", auth, swaggerUi.serve, swaggerUi.setup(specs))
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs))
 
 app.use(errorHandler);
 

@@ -67,6 +67,12 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Product'
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Product'
       security:
         - cookieAuth: []
       responses:
@@ -74,6 +80,8 @@ paths:
           description: Product added successfully
         '400':
           description: Bad request - product with the same code already exists
+        '403':
+          description: Access denied - Insufficient privileges
         '500':
           description: Internal server error
   /api/products/{pid}:
@@ -121,7 +129,7 @@ definitions:
   Product:
     type: object
     properties:
-      name:
+      title:
         type: string
         description: The name of the product
       description:
@@ -131,12 +139,17 @@ definitions:
         type: number
         format: float
         description: The price of the product
+      code:
+        type: string
+        description: Code of the product
       category:
         type: string
         description: The category of the product
       stock:
         type: integer
         description: The stock quantity of the product
-      status:
-        type: boolean
-        description: The availability status of the product
+      thumbnails:
+        type: array
+        description: Array of images of the product
+        items:
+          type: string
